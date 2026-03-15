@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CodeAnalyser")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+24e8715f81c0bc60d549a44b53c6e75ada58e047")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eed28b65b63ce9614a97e6e09ed4f98d5f372d2c")]
 [assembly: System.Reflection.AssemblyProductAttribute("CodeAnalyser")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CodeAnalyser")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

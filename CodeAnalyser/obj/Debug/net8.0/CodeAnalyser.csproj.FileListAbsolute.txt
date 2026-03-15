@@ -53,3 +53,4 @@
 /Users/priyadarshiswain/Projects/sk-playground/CodeAnalyser/bin/Debug/net8.0/Microsoft.Extensions.FileProviders.Abstractions.dll
 /Users/priyadarshiswain/Projects/sk-playground/CodeAnalyser/bin/Debug/net8.0/Microsoft.Extensions.FileProviders.Physical.dll
 /Users/priyadarshiswain/Projects/sk-playground/CodeAnalyser/bin/Debug/net8.0/Microsoft.Extensions.FileSystemGlobbing.dll
+/Users/priyadarshiswain/Projects/sk-playground/CodeAnalyser/obj/Debug/net8.0/CodeAnalyser.sourcelink.json
