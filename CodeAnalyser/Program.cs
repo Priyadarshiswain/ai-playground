@@ -1,5 +1,9 @@
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.Configuration;
 using Microsoft.SemanticKernel;
+using System.ComponentModel;
 
 var config = new ConfigurationBuilder()
     .AddUserSecrets<Program>()
@@ -13,10 +17,18 @@ builder.AddAzureOpenAIChatCompletion(
     apiKey: config["AzureOpenAI:ApiKey"]!
 );
 
+builder.Plugins.AddFromType<CodeAnalyserPlugin>();
+
 var kernel = builder.Build();
 
+var executionSettings = new Microsoft.SemanticKernel.Connectors.AzureOpenAI.AzureOpenAIPromptExecutionSettings
+{
+    FunctionChoiceBehavior = FunctionChoiceBehavior.Auto()
+};
+
 var result = await kernel.InvokePromptAsync(
-    "Explain what a Roslyn syntax tree is in 3 sentences. Be technical but clear."
+    "Use the code analyser tool to analyse the file at path 'CodeAnalyserPlugin.cs' and tell me what classes and methods it contains",
+    new KernelArguments(executionSettings)
 );
 
 Console.WriteLine(result);

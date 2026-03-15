@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "5sl/YTuAktY=",
+  "dgSpecHash": "iZhA+I3d2rI=",
   "success": true,
   "projectFilePath": "/Users/priyadarshiswain/Projects/sk-playground/CodeAnalyser/CodeAnalyser.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,9 @@
     "/Users/priyadarshiswain/.nuget/packages/azure.core/1.50.0/azure.core.1.50.0.nupkg.sha512",
     "/Users/priyadarshiswain/.nuget/packages/microsoft.bcl.asyncinterfaces/8.0.0/microsoft.bcl.asyncinterfaces.8.0.0.nupkg.sha512",
     "/Users/priyadarshiswain/.nuget/packages/microsoft.bcl.hashcode/1.1.1/microsoft.bcl.hashcode.1.1.1.nupkg.sha512",
+    "/Users/priyadarshiswain/.nuget/packages/microsoft.codeanalysis.analyzers/5.3.0-2.25625.1/microsoft.codeanalysis.analyzers.5.3.0-2.25625.1.nupkg.sha512",
+    "/Users/priyadarshiswain/.nuget/packages/microsoft.codeanalysis.common/5.3.0/microsoft.codeanalysis.common.5.3.0.nupkg.sha512",
+    "/Users/priyadarshiswain/.nuget/packages/microsoft.codeanalysis.csharp/5.3.0/microsoft.codeanalysis.csharp.5.3.0.nupkg.sha512",
     "/Users/priyadarshiswain/.nuget/packages/microsoft.extensions.ai/10.3.0/microsoft.extensions.ai.10.3.0.nupkg.sha512",
     "/Users/priyadarshiswain/.nuget/packages/microsoft.extensions.ai.abstractions/10.3.0/microsoft.extensions.ai.abstractions.10.3.0.nupkg.sha512",
     "/Users/priyadarshiswain/.nuget/packages/microsoft.extensions.ai.openai/10.3.0/microsoft.extensions.ai.openai.10.3.0.nupkg.sha512",
@@ -33,12 +36,14 @@
     "/Users/priyadarshiswain/.nuget/packages/microsoft.semantickernel.core/1.73.0/microsoft.semantickernel.core.1.73.0.nupkg.sha512",
     "/Users/priyadarshiswain/.nuget/packages/openai/2.8.0/openai.2.8.0.nupkg.sha512",
     "/Users/priyadarshiswain/.nuget/packages/system.clientmodel/1.8.1/system.clientmodel.1.8.1.nupkg.sha512",
+    "/Users/priyadarshiswain/.nuget/packages/system.collections.immutable/9.0.0/system.collections.immutable.9.0.0.nupkg.sha512",
     "/Users/priyadarshiswain/.nuget/packages/system.diagnostics.diagnosticsource/10.0.3/system.diagnostics.diagnosticsource.10.0.3.nupkg.sha512",
     "/Users/priyadarshiswain/.nuget/packages/system.io.pipelines/10.0.5/system.io.pipelines.10.0.5.nupkg.sha512",
     "/Users/priyadarshiswain/.nuget/packages/system.linq.asyncenumerable/10.0.2/system.linq.asyncenumerable.10.0.2.nupkg.sha512",
     "/Users/priyadarshiswain/.nuget/packages/system.memory.data/8.0.1/system.memory.data.8.0.1.nupkg.sha512",
     "/Users/priyadarshiswain/.nuget/packages/system.net.serversentevents/9.0.9/system.net.serversentevents.9.0.9.nupkg.sha512",
     "/Users/priyadarshiswain/.nuget/packages/system.numerics.tensors/10.0.3/system.numerics.tensors.10.0.3.nupkg.sha512",
+    "/Users/priyadarshiswain/.nuget/packages/system.reflection.metadata/9.0.0/system.reflection.metadata.9.0.0.nupkg.sha512",
     "/Users/priyadarshiswain/.nuget/packages/system.text.encodings.web/10.0.5/system.text.encodings.web.10.0.5.nupkg.sha512",
     "/Users/priyadarshiswain/.nuget/packages/system.text.json/10.0.5/system.text.json.10.0.5.nupkg.sha512",
     "/Users/priyadarshiswain/.nuget/packages/system.threading.channels/10.0.3/system.threading.channels.10.0.3.nupkg.sha512"
