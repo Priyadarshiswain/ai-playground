@@ -168,6 +168,89 @@ public class CodeAnalyserPlugin
 
         return sb.ToString();
     }
+
+    [KernelFunction]
+    [Description("Builds a dependency graph for a specific method or all methods in a C# file")]
+    public string BuildDependencyGraph(
+        [Description("The path to the C# file")]
+        string filePath,
+        [Description("Optional: specific method name to focus on. Leave empty for all methods.")]
+        string? methodName = null)
+    {
+        if (!File.Exists(filePath))
+            return $"File not found: {filePath}";
+
+        var code = File.ReadAllText(filePath);
+        var tree = CSharpSyntaxTree.ParseText(code);
+        var root = tree.GetCompilationUnitRoot();
+
+        var sb = new StringBuilder();
+        sb.AppendLine("=== Dependency Graph ===\n");
+
+        var classes = root.DescendantNodes()
+            .OfType<ClassDeclarationSyntax>();
+
+        foreach (var cls in classes)
+        {
+            var methods = cls.DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Where(m => methodName == null ||
+                    m.Identifier.Text.Equals(methodName,
+                    StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            if (!methods.Any()) continue;
+
+            sb.AppendLine($"[{cls.Identifier.Text}]");
+
+            foreach (var method in methods)
+            {
+                var complexity = CalculateCyclomaticComplexity(method);
+                sb.AppendLine($"  ├── {method.Identifier.Text}() → complexity: {complexity}");
+
+                var invocations = method.DescendantNodes()
+                    .OfType<InvocationExpressionSyntax>()
+                    .Select(i => i.Expression.ToString())
+                    .Where(i => !string.IsNullOrWhiteSpace(i))
+                    .Distinct()
+                    .ToList();
+
+                var creations = method.DescendantNodes()
+                    .OfType<ObjectCreationExpressionSyntax>()
+                    .Select(o => o.Type.ToString())
+                    .Where(o => !string.IsNullOrWhiteSpace(o))
+                    .Distinct()
+                    .ToList();
+
+                if (invocations.Any())
+                {
+                    sb.AppendLine($"  │   calls:");
+                    foreach (var invocation in invocations)
+                        sb.AppendLine($"  │   ├── {invocation}");
+                }
+
+                if (creations.Any())
+                {
+                    sb.AppendLine($"  │   creates:");
+                    foreach (var creation in creations)
+                        sb.AppendLine($"  │   ├── new {creation}");
+                }
+
+                if (!invocations.Any() && !creations.Any())
+                    sb.AppendLine($"  │   └── (no dependencies)");
+
+                sb.AppendLine();
+            }
+        }
+
+        if (sb.ToString().Trim() == "=== Dependency Graph ===")
+            return methodName != null
+                ? $"Method '{methodName}' not found in {Path.GetFileName(filePath)}"
+                : "No methods found in this file.";
+
+        return sb.ToString();
+    }
+
     private int CalculateCyclomaticComplexity(MethodDeclarationSyntax method)
     {
         var complexity = 1;
