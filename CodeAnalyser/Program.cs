@@ -26,8 +26,13 @@ var executionSettings = new Microsoft.SemanticKernel.Connectors.AzureOpenAI.Azur
     FunctionChoiceBehavior = FunctionChoiceBehavior.Auto()
 };
 
+var folderPath = Path.GetFullPath(
+    Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..")
+);
+Console.WriteLine($"Analysing folder: {folderPath}");
+
 var result = await kernel.InvokePromptAsync(
-    $"Analyse the file at 'CodeAnalyserPlugin.cs'. List ALL sections including dependencies, used types, TODO comments, classes and methods. Do not skip any section.",
+    $"Analyse all C# files in the folder '{folderPath}' and give me a full codebase health report",
     new KernelArguments(executionSettings)
 );
 

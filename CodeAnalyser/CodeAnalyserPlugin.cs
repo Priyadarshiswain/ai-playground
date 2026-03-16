@@ -92,6 +92,82 @@ public class CodeAnalyserPlugin
         return sb.ToString();
     }
 
+    [KernelFunction]
+    [Description("Analyses all C# files in a folder and returns a codebase health report")]
+    public string AnalyseFolder(
+        [Description("The folder path containing C# files to analyse")]
+        string folderPath)
+    {
+        if (!Directory.Exists(folderPath))
+            return $"Folder not found: {folderPath}";
+
+        var files = Directory.GetFiles(folderPath, "*.cs", SearchOption.AllDirectories)
+            .Where(f => !f.Contains("obj") && !f.Contains("bin"))
+            .ToList();
+
+        if (!files.Any())
+            return "No C# files found in this folder.";
+
+        var sb = new StringBuilder();
+        sb.AppendLine($"=== Codebase Analysis: {files.Count} files ===\n");
+
+        var allTodos = new List<string>();
+        var complexMethods = new List<string>();
+
+        foreach (var file in files)
+        {
+            var fileName = Path.GetFileName(file);
+            var code = File.ReadAllText(file);
+            var tree = CSharpSyntaxTree.ParseText(code);
+            var root = tree.GetCompilationUnitRoot();
+
+            var todos = tree.GetRoot()
+                .DescendantTrivia()
+                .Where(t => t.IsKind(SyntaxKind.SingleLineCommentTrivia) &&
+                            t.ToString().Contains("TODO", StringComparison.OrdinalIgnoreCase))
+                .Select(t => $"{fileName}: {t.ToString().Trim()}")
+                .ToList();
+
+            allTodos.AddRange(todos);
+
+            var methods = root.DescendantNodes()
+                .OfType<MethodDeclarationSyntax>();
+
+            foreach (var method in methods)
+            {
+                var complexity = CalculateCyclomaticComplexity(method);
+                if (complexity > 5)
+                {
+                    complexMethods.Add(
+                        $"{fileName} → {method.Identifier.Text}() complexity: {complexity} {ComplexityLabel(complexity)}"
+                    );
+                }
+            }
+        }
+
+        sb.AppendLine("=== Methods Needing Attention ===");
+        if (complexMethods.Any())
+            foreach (var m in complexMethods.OrderByDescending(m => m))
+                sb.AppendLine($"  {m}");
+        else
+            sb.AppendLine("  All methods are simple. Clean codebase.");
+
+        sb.AppendLine();
+        sb.AppendLine("=== All TODO Comments ===");
+        if (allTodos.Any())
+            foreach (var todo in allTodos)
+                sb.AppendLine($"  {todo}");
+        else
+            sb.AppendLine("  No TODO comments found.");
+
+        sb.AppendLine();
+        sb.AppendLine("=== Summary ===");
+        sb.AppendLine($"  Files analysed:   {files.Count}");
+        sb.AppendLine($"  Complex methods:  {complexMethods.Count}");
+        sb.AppendLine($"  TODO comments:    {allTodos.Count}");
+
+        return sb.ToString();
+    }
     private int CalculateCyclomaticComplexity(MethodDeclarationSyntax method)
     {
         var complexity = 1;
