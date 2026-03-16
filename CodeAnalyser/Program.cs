@@ -27,7 +27,7 @@ var executionSettings = new Microsoft.SemanticKernel.Connectors.AzureOpenAI.Azur
 };
 
 var result = await kernel.InvokePromptAsync(
-    "Use the code analyser tool to analyse the file at path 'CodeAnalyserPlugin.cs' and tell me what classes and methods it contains",
+    $"Analyse the file at 'CodeAnalyserPlugin.cs'. List ALL sections including dependencies, used types, TODO comments, classes and methods. Do not skip any section.",
     new KernelArguments(executionSettings)
 );
 
