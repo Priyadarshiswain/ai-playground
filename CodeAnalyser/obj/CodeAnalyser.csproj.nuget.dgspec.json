@@ -58,6 +58,10 @@
             "Microsoft.SemanticKernel": {
               "target": "Package",
               "version": "[1.73.0, )"
+            },
+            "MongoDB.Driver": {
+              "target": "Package",
+              "version": "[3.7.0, )"
             }
           },
           "imports": [
