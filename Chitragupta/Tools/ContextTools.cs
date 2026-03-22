@@ -1,9 +1,9 @@
 using ModelContextProtocol.Server;
 using System.ComponentModel;
-using ContextMCP.Services;
-using ContextMCP.Models;
+using Chitragupta.Services;
+using Chitragupta.Models;
 
-namespace ContextMCP.Tools;
+namespace Chitragupta.Tools;
 
 [McpServerToolType]
 public class ContextTools(ContextStore store)

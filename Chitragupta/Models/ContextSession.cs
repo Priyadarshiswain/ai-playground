@@ -1,4 +1,4 @@
-namespace ContextMCP.Models;
+namespace Chitragupta.Models;
 
 public class ContextSession
 {

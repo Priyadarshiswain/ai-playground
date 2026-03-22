@@ -1,5 +1,5 @@
-﻿using ContextMCP.Services;
-using ContextMCP.Tools;
+﻿using Chitragupta.Services;
+using Chitragupta.Tools;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;

@@ -1,9 +1,9 @@
 using MongoDB.Driver;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using ContextMCP.Models;
+using Chitragupta.Models;
 
-namespace ContextMCP.Services;
+namespace Chitragupta.Services;
 
 public class ContextStore
 {
